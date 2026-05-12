@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "lerna run start --parallel"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "@interopio/workspaces-api": "^4.4.0",
     "@interopio/workspaces-ui-react": "^4.4.0",
     "@vitejs/plugin-react": "^6.0.1",
+    "lerna": "^9.0.7",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "tslib": "^2.8.1",

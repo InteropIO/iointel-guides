@@ -31,25 +31,7 @@ const createLocalEnv = async () => {
         throw new Error('Please provide VITE_IO_INTELLIGENCE_LICENSE_KEY in the .env file of the root directory.');
     }
 
-    const demoServerOrigin = rootEnvFileContent
-        .split('\n')
-        .map((line) => line.trim())
-        .find((line) => line.startsWith('VITE_DEMO_SERVER_BASE_ORIGIN='));
-
-    if (!demoServerOrigin) {
-        throw new Error('Please provide VITE_DEMO_SERVER_BASE_ORIGIN in the .env file of the root directory.');
-    }
-
-    const pptSaveDir = rootEnvFileContent
-        .split('\n')
-        .map((line) => line.trim())
-        .find((line) => line.startsWith('VITE_PPT_SAVE_DIR='));
-
-    if (!pptSaveDir) {
-        throw new Error('Please provide VITE_PPT_SAVE_DIR in the .env file of the root directory.');
-    }
-
-    await fs.promises.writeFile(localEnvFileLocation, [ioIntelLicenseKey, licenseKey, demoServerOrigin, pptSaveDir].join('\n'), { encoding: 'utf8' });
+    await fs.promises.writeFile(localEnvFileLocation, [ioIntelLicenseKey, licenseKey].join('\n'), { encoding: 'utf8' });
 };
 
 createLocalEnv().catch(console.error);

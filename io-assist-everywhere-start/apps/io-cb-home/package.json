@@ -6,8 +6,5 @@
         "start": "npm run create-local-env && vite",
         "build": "npm run create-local-env && tsc -b && vite build",
         "create-local-env": "node ./scripts/create-local-env.js"
-    },
-    "devDependencies": {
-        "@interopio/mcp-web": "*"
     }
 }
