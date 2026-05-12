@@ -1,0 +1,27 @@
+{
+  "name": "io-assist-everywhere-start",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@interopio/browser": "^4.4.0",
+    "@interopio/browser-platform": "^4.4.0",
+    "@interopio/home-ui-react": "^4.4.0",
+    "@interopio/modals-api": "^4.4.0",
+    "@interopio/workspaces-api": "^4.4.0",
+    "@interopio/workspaces-ui-react": "^4.4.0",
+    "@vitejs/plugin-react": "^6.0.1",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "tslib": "^2.8.1",
+    "typescript": "^5.8.3",
+    "vite": "^8.0.12",
+    "vite-plugin-environment": "^1.1.3"
+  }
+}
