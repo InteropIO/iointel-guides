@@ -1,0 +1,16 @@
+{
+  "name": "iointel-guides",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InteropIO/iointel-guides.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/InteropIO/iointel-guides/issues"
+  },
+  "homepage": "https://github.com/InteropIO/iointel-guides#readme"
+}
