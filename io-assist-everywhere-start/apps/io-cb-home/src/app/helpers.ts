@@ -24,6 +24,8 @@ export const getIOConfig: IOConnectHomeConfig["getIOConnectConfig"] = () => {
                 (window as any).io = platformInit.io;
                 (window as any).platform = platformInit.platform;
 
+                console.log("IO Connect Browser Platform initialized");
+
                 return platformInit;
             },
             config: {

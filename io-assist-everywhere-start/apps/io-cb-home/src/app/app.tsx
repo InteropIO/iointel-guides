@@ -8,6 +8,7 @@ import "@interopio/home-ui-react/index.css";
 
 const ioConnectHomeConfig: IOConnectHomeConfig = {
     getIOConnectConfig: getIOConfig,
+    setupFlow: { enabled: false },
     settings: { isBeforeunloadDialogEnabled: false }
 };
 
