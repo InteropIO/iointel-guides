@@ -9,6 +9,16 @@
             "customProperties": {
                 "includeInWorkspaces": true
             }
+        },
+        {
+            "name": "client-portfolio",
+            "type": "window",
+            "details": {
+                "url": "http://localhost:4202"
+            },
+            "customProperties": {
+                "includeInWorkspaces": true
+            }
         }
     ],
     "layouts": [],
