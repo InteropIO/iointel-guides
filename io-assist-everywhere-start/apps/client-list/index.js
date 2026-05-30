@@ -1,57 +1,12 @@
 import IOWorkspaces from '@interopio/workspaces-api';
 import IOBrowser from '@interopio/browser';
 
-const clients = [
-    {
-        id: 'CL-10024',
-        portfolioId: 'PF-8801',
-        firstName: 'Amelia',
-        lastName: 'Reed',
-        segment: 'Private Banking',
-        advisor: 'M. Carter',
-        riskProfile: 'Balanced'
-    },
-    {
-        id: 'CL-10031',
-        portfolioId: 'PF-8817',
-        firstName: 'Daniel',
-        lastName: 'Kovacs',
-        segment: 'Wealth',
-        advisor: 'S. Ivanova',
-        riskProfile: 'Growth'
-    },
-    {
-        id: 'CL-10047',
-        portfolioId: 'PF-8840',
-        firstName: 'Sophia',
-        lastName: 'Bennett',
-        segment: 'Retail Plus',
-        advisor: 'L. Morgan',
-        riskProfile: 'Conservative'
-    },
-    {
-        id: 'CL-10058',
-        portfolioId: 'PF-8862',
-        firstName: 'Marcus',
-        lastName: 'Hale',
-        segment: 'Private Banking',
-        advisor: 'M. Carter',
-        riskProfile: 'Income'
-    },
-    {
-        id: 'CL-10073',
-        portfolioId: 'PF-8894',
-        firstName: 'Elena',
-        lastName: 'Petrova',
-        segment: 'Wealth',
-        advisor: 'S. Ivanova',
-        riskProfile: 'Balanced'
-    }
-];
+const GET_CLIENTS_METHOD = 'getClients';
 
 const state = {
     io: undefined,
     workspace: undefined,
+    clients: [],
     selectedClientId: undefined
 };
 
@@ -87,10 +42,10 @@ const setStatus = (message, tone = 'neutral') => {
 const renderClients = () => {
     const { count, list } = getElements();
 
-    count.textContent = `${clients.length} clients`;
+    count.textContent = `${state.clients.length} clients`;
     list.innerHTML = '';
 
-    clients.forEach((client) => {
+    state.clients.forEach((client) => {
         const button = document.createElement('button');
         const selected = client.id === state.selectedClientId;
 
@@ -109,6 +64,14 @@ const renderClients = () => {
         button.addEventListener('click', () => selectClient(client));
         list.appendChild(button);
     });
+};
+
+const loadClients = async () => {
+    const result = await state.io.interop.invoke(GET_CLIENTS_METHOD);
+    const clients = result.returned?.clients ?? [];
+
+    state.clients = clients;
+    renderClients();
 };
 
 const selectClient = async (client) => {
@@ -138,7 +101,7 @@ const restoreSelectionFromWorkspace = async () => {
 
     const context = await state.workspace.getContext();
     const selectedClientId = context?.selectedClient?.id;
-    const knownClient = clients.find((client) => client.id === selectedClientId);
+    const knownClient = state.clients.find((client) => client.id === selectedClientId);
 
     if (knownClient) {
         state.selectedClientId = knownClient.id;
@@ -149,6 +112,7 @@ const restoreSelectionFromWorkspace = async () => {
 
 const start = async () => {
     renderClients();
+    setStatus('Connecting to io.Connect...');
 
     const clientConfig = {
         libraries: [IOWorkspaces]
@@ -166,6 +130,15 @@ const start = async () => {
 
     state.io = io;
     window.io = io;
+
+    try {
+        setStatus('Loading clients...');
+        await loadClients();
+    } catch (error) {
+        console.error('Failed to load clients', error);
+        setStatus('Could not load clients from the platform. See the console for details.', 'error');
+        return;
+    }
 
     if (await io.workspaces.inWorkspace()) {
         state.workspace = await io.workspaces.getMyWorkspace();
