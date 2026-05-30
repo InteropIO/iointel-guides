@@ -5,10 +5,15 @@ import type { IOConnectBrowser } from "@interopio/browser";
 import IOModals from "@interopio/modals-api";
 import IOWorkspaces from "@interopio/workspaces-api";
 import config from "../config.json";
+import { guidePluginStart } from "./plugin";
 
 const getPluginsDefinitions = (): IOConnectBrowserPlatform.Plugins.Config => {
     return {
-        definitions: []
+        definitions: [{
+            name: "guide-plugin",
+            start: guidePluginStart,
+            critical: true
+        }]
     };
 };
 
