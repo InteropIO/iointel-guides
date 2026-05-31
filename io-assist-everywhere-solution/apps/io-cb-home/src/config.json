@@ -19,6 +19,26 @@
             "customProperties": {
                 "includeInWorkspaces": true
             }
+        },
+        {
+            "name": "io-assist-angular",
+            "type": "window",
+            "details": {
+                "url": "http://localhost:4003"
+            },
+            "customProperties": {
+                "includeInWorkspaces": true
+            }
+        },
+        {
+            "name": "io-assist-react",
+            "type": "window",
+            "details": {
+                "url": "http://localhost:4004"
+            },
+            "customProperties": {
+                "includeInWorkspaces": true
+            }
         }
     ],
     "layouts": [

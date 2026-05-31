@@ -1,11 +1,42 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from "@angular/core";
+import IOBrowser from "@interopio/browser";
+import { provideIoAssist } from "@interopio/io-assist-ng";
 
-import { routes } from './app.routes';
+const AGENT_SERVER_URL = "http://localhost:4111";
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideRouter(routes)
-  ]
+    providers: [
+        provideBrowserGlobalErrorListeners(),
+        provideIoAssist({
+            connectConfig: {
+                browser: {
+                    factory: IOBrowser,
+                    config: {
+                        modals: {
+                            dialogs: {
+                                enabled: true,
+                            },
+                        },
+                    },
+                },
+            },
+            defaultAgentName: "io-agent",
+            aiWebConfig: {
+                agentServer: {
+                    baseUrl: AGENT_SERVER_URL,
+                },
+                mcp: {
+                    clientsConfig: {
+                        enforceStrictCapabilities: false,
+                        capabilities: {},
+                    },
+                    ioIntel: {
+                        web: {
+                            enabled: true,
+                        },
+                    },
+                },
+            },
+        }),
+    ],
 };

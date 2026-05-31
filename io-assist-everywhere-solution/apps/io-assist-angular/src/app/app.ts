@@ -1,12 +1,17 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, signal } from "@angular/core";
+import { IoAssist, type IoAssistDynamicConfig } from "@interopio/io-assist-ng";
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+    selector: "app-root",
+    imports: [IoAssist],
+    templateUrl: "./app.html",
+    styleUrl: "./app.css",
 })
 export class App {
-  protected readonly title = signal('io-assist-angular');
+    protected readonly dynamicConfig = signal<IoAssistDynamicConfig>({
+        user: {
+            id: "acme-advisor",
+            name: "ACME Advisor",
+        },
+    });
 }
