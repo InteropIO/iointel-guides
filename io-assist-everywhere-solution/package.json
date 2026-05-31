@@ -7,6 +7,9 @@
     "start": "lerna run start --parallel",
     "clean": "lerna clean --yes && rimraf ./node_modules"
   },
+  "workspaces": [
+    "apps/*"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
