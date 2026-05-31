@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./index.js" type="module"></script>
+    <link rel="stylesheet" href="./index.css">
+    <title>Client List</title>
+</head>
+
+<body>
+    <main class="app-shell">
+        <header class="app-header">
+            <p class="eyebrow">Relationship Banking</p>
+            <h1>Client List</h1>
+            <p class="status" id="status">Starting io.Connect...</p>
+        </header>
+
+        <section class="client-panel" aria-label="Bank clients">
+            <div class="panel-header">
+                <h2>Clients</h2>
+                <span id="client-count"></span>
+            </div>
+
+            <div class="client-list" id="client-list"></div>
+        </section>
+    </main>
+</body>
+
+</html>
