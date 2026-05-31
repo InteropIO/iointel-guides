@@ -4,16 +4,26 @@ import IOBrowserPlatform, { type IOConnectBrowserPlatform } from "@interopio/bro
 import type { IOConnectBrowser } from "@interopio/browser";
 import IOModals from "@interopio/modals-api";
 import IOWorkspaces from "@interopio/workspaces-api";
+import { ServerFactory } from "@interopio/mcp-web";
 import config from "../config.json";
+import { getMCPWebServerConfig } from "./mcp";
 import { guidePluginStart } from "./plugin";
 
 const getPluginsDefinitions = (): IOConnectBrowserPlatform.Plugins.Config => {
     return {
-        definitions: [{
-            name: "guide-plugin",
-            start: guidePluginStart,
-            critical: true
-        }]
+        definitions: [
+            {
+                name: "guide-plugin",
+                start: guidePluginStart,
+                critical: true
+            },
+            {
+                name: "io.MCPWeb",
+                start: ServerFactory,
+                critical: true,
+                config: getMCPWebServerConfig()
+            }
+        ]
     };
 };
 

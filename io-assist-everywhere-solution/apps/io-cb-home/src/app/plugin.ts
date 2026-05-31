@@ -1,6 +1,8 @@
 import type { IOConnectBrowser } from "@interopio/browser";
 import type { IOConnectBrowserPlatform } from "@interopio/browser-platform";
 
+export const GET_CLIENTS_METHOD = "getClients";
+
 interface Client {
     id: string;
     portfolioId: string;
@@ -60,7 +62,7 @@ const clients: Client[] = [
 ];
 
 export const guidePluginStart: IOConnectBrowserPlatform.Plugins.PluginDefinition["start"] = async (io: IOConnectBrowser.API) => {
-    await io.interop.register("getClients", () => ({
+    await io.interop.register(GET_CLIENTS_METHOD, () => ({
         clients
     }));
 

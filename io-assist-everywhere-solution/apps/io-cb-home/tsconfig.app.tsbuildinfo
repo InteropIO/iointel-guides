@@ -1,1 +1,1 @@
-{"root":["./src/main.tsx","./src/app/app.tsx","./src/app/helpers.ts","./src/app/tools.ts"],"version":"5.8.3"}
+{"root":["./src/main.tsx","./src/app/app.tsx","./src/app/helpers.ts","./src/app/mcp.ts","./src/app/plugin.ts"],"version":"5.9.3"}
