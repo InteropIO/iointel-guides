@@ -1,7 +1,10 @@
 import { Mastra } from '@mastra/core/mastra';
 import { PinoLogger } from '@mastra/loggers';
 import { LibSQLStore } from '@mastra/libsql';
+import { IoMastraBridgeFactory } from '@interopio/ai-mastra-bridge';
 import { ioAgent } from './agents/io-agent';
+
+const bridge = IoMastraBridgeFactory();
 
 export const mastra = new Mastra({
     agents: { ioAgent },
@@ -14,4 +17,7 @@ export const mastra = new Mastra({
         name: 'Mastra',
         level: 'info'
     }),
+    server: {
+        apiRoutes: [...bridge.createHonoRoutes()]
+    }
 });
