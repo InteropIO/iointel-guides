@@ -10,6 +10,7 @@ import IOWorkspaces from '@interopio/workspaces-api'
 import './App.css'
 
 const AGENT_SERVER_URL = 'http://localhost:4111'
+const MCP_SANDBOX_PROXY_URL = 'https://iointel-demos-mcp-apps-proxy.interop.io'
 const workingContextConfig = {
   schema: {
     selectedClient: {
@@ -51,7 +52,17 @@ const staticConfig: IoAssistStaticConfig = {
     mcp: {
       clientsConfig: {
         enforceStrictCapabilities: false,
-        capabilities: {},
+        capabilities: {
+          extensions: {
+            'io.modelcontextprotocol/ui': {
+              mimeTypes: ['text/html;profile=mcp-app'],
+            },
+          },
+        },
+      },
+      mcpApps: {
+        sandboxProxyUrl: MCP_SANDBOX_PROXY_URL,
+        displayMode: 'workspace',
       },
       ioIntel: {
         web: {
