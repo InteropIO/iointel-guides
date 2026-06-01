@@ -189,5 +189,16 @@
         "customProperties": {
             "includeInWorkspaces": true
         }
+    },
+    {
+        "name": "io-assist-custom",
+        "type": "window",
+        "details": {
+            "url": "http://localhost:4005"
+        },
+        "caption": "Custom ACME Banking assistant skin built directly with AI-Web. Provides a small chat interface that connects to the agent backend and the app-hosted MCP Web server.",
+        "customProperties": {
+            "includeInWorkspaces": true
+        }
     }
 ]

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ACME Assist Custom</title>
+</head>
+
+<body>
+    <main class="app-shell">
+        <header class="app-header">
+            <div>
+                <p class="eyebrow">ACME Banking</p>
+                <h1>Custom Assist</h1>
+            </div>
+            <span class="status" id="status">Starting</span>
+        </header>
+
+        <section class="chat-panel" aria-label="Assistant conversation">
+            <div class="messages" id="messages"></div>
+
+            <form class="composer" id="composer">
+                <textarea id="message-input" rows="2" placeholder="Ask about clients or portfolios"></textarea>
+                <button type="submit" id="send-button">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
