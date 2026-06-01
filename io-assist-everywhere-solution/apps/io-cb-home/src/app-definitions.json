@@ -1,0 +1,193 @@
+[
+    {
+        "name": "client-list",
+        "type": "window",
+        "details": {
+            "url": "http://localhost:4201"
+        },
+        "caption": "Displays ACME Banking clients and lets an advisor select the active client for the current workspace. On selection, writes selectedClient metadata to Workspace Context.",
+        "customProperties": {
+            "includeInWorkspaces": true,
+            "interop": {
+                "context": {
+                    "sources": [
+                        "workspace"
+                    ],
+                    "description": "Writes the selected ACME Banking client to Workspace Context so portfolio and assistant apps can use the current client selection.",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "selectedClient": {
+                                "type": "object",
+                                "description": "The ACME Banking client currently selected in the workspace.",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "Client identifier, for example CL-10031."
+                                    },
+                                    "portfolioId": {
+                                        "type": "string",
+                                        "description": "Portfolio identifier associated with the client, for example PF-8817."
+                                    },
+                                    "firstName": {
+                                        "type": "string",
+                                        "description": "Client first name."
+                                    },
+                                    "lastName": {
+                                        "type": "string",
+                                        "description": "Client last name."
+                                    },
+                                    "fullName": {
+                                        "type": "string",
+                                        "description": "Client full name."
+                                    },
+                                    "segment": {
+                                        "type": "string",
+                                        "description": "Banking segment, for example Wealth, Retail Plus, or Private Banking."
+                                    },
+                                    "advisor": {
+                                        "type": "string",
+                                        "description": "Advisor assigned to the client."
+                                    },
+                                    "riskProfile": {
+                                        "type": "string",
+                                        "description": "Client investment risk profile."
+                                    },
+                                    "selectedAt": {
+                                        "type": "string",
+                                        "description": "ISO timestamp for when the client was selected."
+                                    }
+                                },
+                                "required": [
+                                    "id",
+                                    "portfolioId",
+                                    "firstName",
+                                    "lastName",
+                                    "fullName"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "selectedClient"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    {
+        "name": "client-portfolio",
+        "type": "window",
+        "details": {
+            "url": "http://localhost:4202"
+        },
+        "caption": "Displays portfolio details for the ACME Banking client selected in Workspace Context. Shows portfolio value, cash balance, YTD return, holdings, and recent activity.",
+        "customProperties": {
+            "includeInWorkspaces": true,
+            "interop": {
+                "methods": [
+                    {
+                        "name": "ClientPortfolio.Display",
+                        "description": "Displays portfolio details for a client by client id or portfolio id.",
+                        "inputSchema": {
+                            "type": "object",
+                            "properties": {
+                                "clientId": {
+                                    "type": "string",
+                                    "description": "Client identifier to display, for example CL-10031."
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "description": "Alternative client identifier. Use this when the caller has an id field instead of clientId."
+                                }
+                            }
+                        },
+                        "outputSchema": {
+                            "type": "object",
+                            "properties": {
+                                "ok": {
+                                    "type": "boolean",
+                                    "description": "Whether the portfolio was found and displayed."
+                                },
+                                "clientId": {
+                                    "type": "string",
+                                    "description": "Resolved client identifier."
+                                },
+                                "portfolioId": {
+                                    "type": "string",
+                                    "description": "Resolved portfolio identifier."
+                                },
+                                "fullName": {
+                                    "type": "string",
+                                    "description": "Resolved client full name."
+                                },
+                                "message": {
+                                    "type": "string",
+                                    "description": "Error or status message when the portfolio cannot be displayed."
+                                }
+                            },
+                            "required": [
+                                "ok"
+                            ]
+                        }
+                    }
+                ],
+                "context": {
+                    "sources": [
+                        "workspace"
+                    ],
+                    "description": "Reads selectedClient from Workspace Context and automatically displays that client's portfolio when the selection changes.",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "selectedClient": {
+                                "type": "object",
+                                "description": "The ACME Banking client selected in the workspace.",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "Client identifier used to load portfolio details."
+                                    },
+                                    "portfolioId": {
+                                        "type": "string",
+                                        "description": "Portfolio identifier associated with the selected client."
+                                    },
+                                    "fullName": {
+                                        "type": "string",
+                                        "description": "Selected client full name."
+                                    }
+                                },
+                                "required": [
+                                    "id"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "selectedClient"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    {
+        "name": "io-assist-angular",
+        "type": "window",
+        "details": {
+            "url": "http://localhost:4003"
+        },
+        "customProperties": {
+            "includeInWorkspaces": true
+        }
+    },
+    {
+        "name": "io-assist-react",
+        "type": "window",
+        "details": {
+            "url": "http://localhost:4004"
+        },
+        "customProperties": {
+            "includeInWorkspaces": true
+        }
+    }
+]

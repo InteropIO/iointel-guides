@@ -16,6 +16,7 @@
   "devDependencies": {
     "@interopio/browser": "^4.4.0",
     "@interopio/browser-platform": "^4.4.0",
+    "@interopio/desktop": "^6.20.2",
     "@interopio/home-ui-react": "^4.4.0",
     "@interopio/mcp-web": "^1.2.1",
     "@interopio/modals-api": "^4.4.0",

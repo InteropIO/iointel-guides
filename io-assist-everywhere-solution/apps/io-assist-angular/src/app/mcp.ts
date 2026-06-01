@@ -7,6 +7,8 @@ const MCP_SERVER_METHOD_NAME = "io.mcp.web.server";
 const GET_CLIENTS_METHOD = "getClients";
 const GET_CLIENTS_TOOL = "get_clients";
 
+const isIOConnectDesktop = (): boolean => Boolean((window as any).glue42gd || (window as any).iodesktop);
+
 const getMCPWebServerConfig = (): IoIntelMCPWeb.Server.Config => ({
     licenseKey: (import.meta as any).env.VITE_IO_INTELLIGENCE_LICENSE_KEY,
     mcpCoreServer: {
@@ -58,6 +60,11 @@ const getMCPWebServerConfig = (): IoIntelMCPWeb.Server.Config => ({
 });
 
 export const startMCPWebServer = async (io: IOConnectAPI): Promise<void> => {
+    if (isIOConnectDesktop()) {
+        console.info("MCP Web server is hosted by the io.Connect Desktop service app.");
+        return;
+    }
+
     const hasMCPWebServer = io.interop.methods().some((method) => method.name === MCP_SERVER_METHOD_NAME);
 
     if (hasMCPWebServer) {

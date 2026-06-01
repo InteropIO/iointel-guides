@@ -1,0 +1,241 @@
+[
+    {
+        "name": "client-management",
+        "type": "Workspace",
+        "metadata": {
+            "description": "A workspace layout for ACME Banking client management. It includes a client list for selecting the active client and a portfolio view that displays portfolio details from the selected workspace client context.",
+            "contextSchema": {
+                "type": "object",
+                "properties": {
+                    "selectedClient": {
+                        "type": "object",
+                        "description": "The ACME Banking client currently selected in the workspace.",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "Client identifier, for example CL-10031."
+                            },
+                            "portfolioId": {
+                                "type": "string",
+                                "description": "Portfolio identifier associated with the client, for example PF-8817."
+                            },
+                            "firstName": {
+                                "type": "string",
+                                "description": "Client first name."
+                            },
+                            "lastName": {
+                                "type": "string",
+                                "description": "Client last name."
+                            },
+                            "fullName": {
+                                "type": "string",
+                                "description": "Client full name."
+                            },
+                            "segment": {
+                                "type": "string",
+                                "description": "Banking segment, for example Wealth, Retail Plus, or Private Banking."
+                            },
+                            "advisor": {
+                                "type": "string",
+                                "description": "Advisor assigned to the client."
+                            },
+                            "riskProfile": {
+                                "type": "string",
+                                "description": "Client investment risk profile."
+                            },
+                            "selectedAt": {
+                                "type": "string",
+                                "description": "ISO timestamp for when the client was selected."
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "portfolioId",
+                            "firstName",
+                            "lastName",
+                            "fullName"
+                        ]
+                    }
+                },
+                "required": [
+                    "selectedClient"
+                ]
+            }
+        },
+        "components": [
+            {
+                "type": "Workspace",
+                "state": {
+                    "children": [
+                        {
+                            "type": "row",
+                            "children": [
+                                {
+                                    "type": "group",
+                                    "children": [
+                                        {
+                                            "type": "window",
+                                            "config": {
+                                                "isMaximized": false,
+                                                "isFocused": false,
+                                                "isSelected": true,
+                                                "appName": "client-list",
+                                                "title": "client-list",
+                                                "allowExtract": true,
+                                                "allowReorder": true,
+                                                "showCloseButton": true,
+                                                "minWidth": 20,
+                                                "maxWidth": 32767,
+                                                "minHeight": 20,
+                                                "maxHeight": 32767,
+                                                "widthInPx": 872,
+                                                "heightInPx": 1245,
+                                                "channelId": null,
+                                                "context": {},
+                                                "instanceId": "g42-UNJoVI7Qh7"
+                                            }
+                                        }
+                                    ],
+                                    "config": {
+                                        "positionIndex": 0,
+                                        "frameId": "g42-QTGAorXQ-F",
+                                        "workspaceId": "shYFtS-0vI",
+                                        "activeTabIndex": 0,
+                                        "width": 50,
+                                        "height": null,
+                                        "allowDrop": true,
+                                        "allowDropHeader": true,
+                                        "allowDropLeft": true,
+                                        "allowDropRight": true,
+                                        "allowDropTop": true,
+                                        "allowDropBottom": true,
+                                        "isPinned": false,
+                                        "allowExtract": true,
+                                        "allowReorder": true,
+                                        "showMaximizeButton": true,
+                                        "showEjectButton": true,
+                                        "showAddWindowButton": true,
+                                        "minWidth": 20,
+                                        "maxWidth": 32767,
+                                        "minHeight": 58,
+                                        "maxHeight": 32767,
+                                        "widthInPx": 872,
+                                        "heightInPx": 1283,
+                                        "isMaximized": false,
+                                        "maximizationBoundary": false
+                                    }
+                                },
+                                {
+                                    "type": "group",
+                                    "children": [
+                                        {
+                                            "type": "window",
+                                            "config": {
+                                                "isMaximized": false,
+                                                "isFocused": false,
+                                                "isSelected": true,
+                                                "appName": "client-portfolio",
+                                                "title": "client-portfolio",
+                                                "allowExtract": true,
+                                                "allowReorder": true,
+                                                "showCloseButton": true,
+                                                "minWidth": 20,
+                                                "maxWidth": 32767,
+                                                "minHeight": 20,
+                                                "maxHeight": 32767,
+                                                "widthInPx": 871,
+                                                "heightInPx": 1245,
+                                                "channelId": null,
+                                                "context": {},
+                                                "instanceId": "g42-nSQ2ZJyBL5"
+                                            }
+                                        }
+                                    ],
+                                    "config": {
+                                        "positionIndex": 1,
+                                        "frameId": "g42-QTGAorXQ-F",
+                                        "workspaceId": "shYFtS-0vI",
+                                        "activeTabIndex": 0,
+                                        "width": 50,
+                                        "height": null,
+                                        "allowDrop": true,
+                                        "allowDropHeader": true,
+                                        "allowDropLeft": true,
+                                        "allowDropRight": true,
+                                        "allowDropTop": true,
+                                        "allowDropBottom": true,
+                                        "isPinned": false,
+                                        "allowExtract": true,
+                                        "allowReorder": true,
+                                        "showMaximizeButton": true,
+                                        "showEjectButton": true,
+                                        "showAddWindowButton": true,
+                                        "minWidth": 20,
+                                        "maxWidth": 32767,
+                                        "minHeight": 58,
+                                        "maxHeight": 32767,
+                                        "widthInPx": 871,
+                                        "heightInPx": 1283,
+                                        "isMaximized": false,
+                                        "maximizationBoundary": false
+                                    }
+                                }
+                            ],
+                            "config": {
+                                "positionIndex": 0,
+                                "frameId": "g42-QTGAorXQ-F",
+                                "workspaceId": "shYFtS-0vI",
+                                "activeTabIndex": null,
+                                "width": null,
+                                "height": null,
+                                "allowDrop": true,
+                                "isPinned": false,
+                                "allowSplitters": true,
+                                "minWidth": 40,
+                                "maxWidth": 32767,
+                                "minHeight": 58,
+                                "maxHeight": 32767,
+                                "widthInPx": 1748,
+                                "heightInPx": 1283,
+                                "isMaximized": false,
+                                "maximizationBoundary": false
+                            }
+                        }
+                    ],
+                    "config": {
+                        "workspaceId": "shYFtS-0vI",
+                        "name": "client-management",
+                        "isHibernated": false,
+                        "isSelected": true,
+                        "allowDrop": true,
+                        "allowDropLeft": true,
+                        "allowDropTop": true,
+                        "allowDropRight": true,
+                        "allowDropBottom": true,
+                        "allowExtract": true,
+                        "allowWindowReorder": true,
+                        "allowSystemHibernation": true,
+                        "showCloseButton": true,
+                        "showSaveButton": true,
+                        "allowWorkspaceTabReorder": true,
+                        "allowSplitters": true,
+                        "showAddWindowButtons": true,
+                        "showEjectButtons": true,
+                        "showWindowCloseButtons": true,
+                        "minWidth": 40,
+                        "maxWidth": 32767,
+                        "minHeight": 58,
+                        "maxHeight": 32767,
+                        "widthInPx": 1748,
+                        "heightInPx": 1283,
+                        "isPinned": false,
+                        "icon": null,
+                        "lastActive": 1778661735762,
+                        "allowMultiple": true
+                    },
+                    "context": {}
+                }
+            }
+        ]
+    }
+]

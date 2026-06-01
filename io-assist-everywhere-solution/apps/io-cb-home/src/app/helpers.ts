@@ -4,7 +4,9 @@ import IOBrowserPlatform, { type IOConnectBrowserPlatform } from "@interopio/bro
 import type { IOConnectBrowser } from "@interopio/browser";
 import IOModals from "@interopio/modals-api";
 import IOWorkspaces from "@interopio/workspaces-api";
-import config from "../config.json";
+import appDefinitions from "../app-definitions.json";
+import channelDefinitions from "../channel-definitions.json";
+import workspaceLayouts from "../workspace-layouts.json";
 import { guidePluginStart } from "./plugin";
 // Chapter 8 moves MCP Web into the io.Assist application.
 // Keep these imports and the plugin definition below as comments so you can see how the guide progressed.
@@ -53,14 +55,14 @@ export const getIOConfig: IOConnectHomeConfig["getIOConnectConfig"] = () => {
                     isFrame: true
                 },
                 applications: {
-                    local: config.apps
+                    local: appDefinitions
                 },
                 layouts: {
                     mode: "session",
-                    local: config.layouts as IOConnectBrowser.Layouts.Layout[]
+                    local: workspaceLayouts as IOConnectBrowser.Layouts.Layout[]
                 },
                 channels: {
-                    definitions: config.channels
+                    definitions: channelDefinitions
                 },
                 gateway: {
                     logging: {
