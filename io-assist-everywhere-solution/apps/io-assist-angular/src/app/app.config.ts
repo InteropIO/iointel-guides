@@ -3,6 +3,7 @@ import IOBrowser from "@interopio/browser";
 import { provideIoAssist } from "@interopio/io-assist-ng";
 import { IoIntelWorkingContextFactory } from "@interopio/working-context";
 import IOWorkspaces from "@interopio/workspaces-api";
+import { startMCPWebServer } from "./mcp";
 
 const AGENT_SERVER_URL = "http://localhost:4111";
 const MCP_SANDBOX_PROXY_URL = "https://iointel-demos-mcp-apps-proxy.interop.io";
@@ -21,13 +22,21 @@ const WORKING_CONTEXT_CONFIG = {
     },
 } as const;
 
+const createIOConnect: typeof IOBrowser = async (config) => {
+    const io = await IOBrowser(config);
+
+    await startMCPWebServer(io);
+
+    return io;
+};
+
 export const appConfig: ApplicationConfig = {
     providers: [
         provideBrowserGlobalErrorListeners(),
         provideIoAssist({
             connectConfig: {
                 browser: {
-                    factory: IOBrowser,
+                    factory: createIOConnect,
                     config: {
                         libraries: [IOWorkspaces],
                         modals: {

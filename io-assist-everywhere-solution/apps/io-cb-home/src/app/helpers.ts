@@ -4,10 +4,13 @@ import IOBrowserPlatform, { type IOConnectBrowserPlatform } from "@interopio/bro
 import type { IOConnectBrowser } from "@interopio/browser";
 import IOModals from "@interopio/modals-api";
 import IOWorkspaces from "@interopio/workspaces-api";
-import { ServerFactory } from "@interopio/mcp-web";
 import config from "../config.json";
-import { getMCPWebServerConfig } from "./mcp";
 import { guidePluginStart } from "./plugin";
+// Chapter 8 moves MCP Web into the io.Assist application.
+// Keep these imports and the plugin definition below as comments so you can see how the guide progressed.
+//
+// import { ServerFactory } from "@interopio/mcp-web";
+// import { getMCPWebServerConfig } from "./mcp";
 
 const getPluginsDefinitions = (): IOConnectBrowserPlatform.Plugins.Config => {
     return {
@@ -17,12 +20,12 @@ const getPluginsDefinitions = (): IOConnectBrowserPlatform.Plugins.Config => {
                 start: guidePluginStart,
                 critical: true
             },
-            {
-                name: "io.MCPWeb",
-                start: ServerFactory,
-                critical: true,
-                config: getMCPWebServerConfig()
-            }
+            // {
+            //     name: "io.MCPWeb",
+            //     start: ServerFactory,
+            //     critical: true,
+            //     config: getMCPWebServerConfig()
+            // }
         ]
     };
 };
