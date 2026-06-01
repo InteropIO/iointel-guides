@@ -11,7 +11,26 @@ import './App.css'
 import { startMCPWebServer } from './mcp'
 
 const AGENT_SERVER_URL = 'http://localhost:4111'
+const MCP_HTTP_SERVER_URL = 'http://localhost:8989/mcp'
 const MCP_SANDBOX_PROXY_URL = 'https://iointel-demos-mcp-apps-proxy.interop.io'
+const isIOConnectDesktop = Boolean((window as any).glue42gd || (window as any).iodesktop)
+const ioIntelMCPConfig = isIOConnectDesktop
+  ? {
+      remote: {
+        streamableHttp: {
+          url: MCP_HTTP_SERVER_URL,
+          name: 'ACME Banking MCP HTTP',
+        },
+      },
+      web: {
+        enabled: false,
+      },
+    }
+  : {
+      web: {
+        enabled: true,
+      },
+    }
 const workingContextConfig = {
   schema: {
     selectedClient: {
@@ -30,7 +49,9 @@ const workingContextConfig = {
 const createIOConnect: typeof IOBrowser = async (config) => {
   const io = await IOBrowser(config)
 
-  await startMCPWebServer(io)
+  if (!isIOConnectDesktop) {
+    await startMCPWebServer(io)
+  }
 
   return io
 }
@@ -73,11 +94,7 @@ const staticConfig: IoAssistStaticConfig = {
         sandboxProxyUrl: MCP_SANDBOX_PROXY_URL,
         displayMode: 'workspace',
       },
-      ioIntel: {
-        web: {
-          enabled: true,
-        },
-      },
+      ioIntel: ioIntelMCPConfig,
     },
   },
 }

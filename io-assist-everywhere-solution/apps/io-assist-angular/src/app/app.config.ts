@@ -6,7 +6,26 @@ import IOWorkspaces from "@interopio/workspaces-api";
 import { startMCPWebServer } from "./mcp";
 
 const AGENT_SERVER_URL = "http://localhost:4111";
+const MCP_HTTP_SERVER_URL = "http://localhost:8989/mcp";
 const MCP_SANDBOX_PROXY_URL = "https://iointel-demos-mcp-apps-proxy.interop.io";
+const IS_IO_CONNECT_DESKTOP = Boolean((window as any).glue42gd || (window as any).iodesktop);
+const IO_INTEL_MCP_CONFIG = IS_IO_CONNECT_DESKTOP
+    ? {
+        remote: {
+            streamableHttp: {
+                url: MCP_HTTP_SERVER_URL,
+                name: "ACME Banking MCP HTTP",
+            },
+        },
+        web: {
+            enabled: false,
+        },
+    }
+    : {
+        web: {
+            enabled: true,
+        },
+    };
 const WORKING_CONTEXT_CONFIG = {
     schema: {
         selectedClient: {
@@ -25,7 +44,9 @@ const WORKING_CONTEXT_CONFIG = {
 const createIOConnect: typeof IOBrowser = async (config) => {
     const io = await IOBrowser(config);
 
-    await startMCPWebServer(io);
+    if (!IS_IO_CONNECT_DESKTOP) {
+        await startMCPWebServer(io);
+    }
 
     return io;
 };
@@ -71,11 +92,7 @@ export const appConfig: ApplicationConfig = {
                         sandboxProxyUrl: MCP_SANDBOX_PROXY_URL,
                         displayMode: "workspace",
                     },
-                    ioIntel: {
-                        web: {
-                            enabled: true,
-                        },
-                    },
+                    ioIntel: IO_INTEL_MCP_CONFIG,
                 },
             },
         }),

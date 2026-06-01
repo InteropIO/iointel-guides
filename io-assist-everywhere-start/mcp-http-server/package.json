@@ -1,0 +1,10 @@
+{
+  "name": "io-assist-anywhere-mcp-http-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "npm run create-local-env && rollup --config rollup.config-prebuild.js && rollup --config rollup.config-cjs.js",
+    "create-local-env": "node ./scripts/create-local-env.js"
+  }
+}
