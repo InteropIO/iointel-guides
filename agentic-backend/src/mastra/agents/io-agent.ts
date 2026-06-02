@@ -1,7 +1,52 @@
 import { anthropic } from '@ai-sdk/anthropic';
 import { Agent } from '@mastra/core/agent';
+import type { AgentExecutionOptions } from '@mastra/core/agent';
+import type { LanguageModelUsage } from '@mastra/core/stream';
 import { Memory } from '@mastra/memory';
 import { LibSQLStore } from '@mastra/libsql';
+import { mastraLogger } from '../logger';
+
+type LegacyLanguageModelUsage = {
+    promptTokens?: number;
+    completionTokens?: number;
+    totalTokens?: number;
+};
+
+const tokenUsageLogger = mastraLogger.child({
+    component: 'llm-token-usage',
+    agentId: 'io-agent',
+});
+
+const readTokenCount = (
+    usage: LanguageModelUsage & LegacyLanguageModelUsage,
+    v2Key: 'inputTokens' | 'outputTokens' | 'totalTokens',
+    legacyKey: keyof LegacyLanguageModelUsage,
+) => {
+    const tokenCount = usage[v2Key] ?? usage[legacyKey];
+
+    return typeof tokenCount === 'number' ? tokenCount : 0;
+};
+
+const logLlmTokenUsage: NonNullable<AgentExecutionOptions['onStepFinish']> = (event) => {
+    const usage = event.usage as LanguageModelUsage & LegacyLanguageModelUsage;
+    const inputTokens = readTokenCount(usage, 'inputTokens', 'promptTokens');
+    const outputTokens = readTokenCount(usage, 'outputTokens', 'completionTokens');
+    const totalTokens = usage.totalTokens ?? inputTokens + outputTokens;
+
+    tokenUsageLogger.warn(`LLM step token usage: input=${inputTokens}, output=${outputTokens}, total=${totalTokens}`, {
+        runId: event.runId,
+        model: event.model?.modelId ?? event.response.modelId,
+        provider: event.model?.provider,
+        finishReason: event.finishReason,
+        stepType: event.stepType,
+        inputTokens,
+        outputTokens,
+        totalTokens,
+        reasoningTokens: usage.reasoningTokens,
+        cachedInputTokens: usage.cachedInputTokens,
+        cacheCreationInputTokens: usage.cacheCreationInputTokens,
+    });
+};
 
 export const ioAgent = new Agent({
     id: 'io-agent',
@@ -40,6 +85,9 @@ All API functions return a dict. Check 'result.get("success")' for status. Acces
 - 'RuntimeError: <function> received unknown keyword arguments: <arg>' — kwarg name not recognized. Verify against definitions.
     `,
     model: anthropic("claude-opus-4-5"),
+    defaultOptions: {
+        onStepFinish: logLlmTokenUsage,
+    },
     memory: new Memory({
         options: {
             generateTitle: true,

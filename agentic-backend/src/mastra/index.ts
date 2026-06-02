@@ -1,9 +1,9 @@
 import { Mastra } from '@mastra/core/mastra';
-import { PinoLogger } from '@mastra/loggers';
 import { LibSQLStore } from '@mastra/libsql';
 import { IoMastraBridgeFactory } from '@interopio/ai-mastra-bridge';
 import { ioAgent } from './agents/io-agent';
 import { DefaultExporter, MastraStorageExporter, Observability } from '@mastra/observability';
+import { mastraLogger } from './logger';
 
 const bridge = IoMastraBridgeFactory();
 
@@ -13,10 +13,7 @@ export const mastra = new Mastra({
         id: 'mastra-storage',
         url: 'file:./mastra.db', // Storage is required for tracing
     }),
-    logger: new PinoLogger({
-        name: 'Mastra',
-        level: 'info'
-    }),
+    logger: mastraLogger,
     server: {
         apiRoutes: [...bridge.createHonoRoutes()]
     },
