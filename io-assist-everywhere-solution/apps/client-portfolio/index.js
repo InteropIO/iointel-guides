@@ -1,5 +1,6 @@
 import IOWorkspaces from '@interopio/workspaces-api';
 import IOBrowser from '@interopio/browser';
+import { goLondon } from './london.js';
 
 const DISPLAY_CLIENT_PORTFOLIO_METHOD = 'ClientPortfolio.Display';
 
@@ -265,6 +266,8 @@ const registerInteropMethods = async (io) => {
 
         return displayPortfolio(clientId, 'interop');
     });
+
+    await goLondon(io);
 };
 
 const start = async () => {

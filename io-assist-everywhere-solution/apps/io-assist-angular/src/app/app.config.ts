@@ -69,10 +69,10 @@ export const appConfig: ApplicationConfig = {
                 },
             },
             defaultAgentName: "io-agent",
-            workingContext: {
-                factory: IoIntelWorkingContextFactory,
-                config: WORKING_CONTEXT_CONFIG,
-            },
+            // workingContext: {
+            //     factory: IoIntelWorkingContextFactory,
+            //     config: WORKING_CONTEXT_CONFIG,
+            // },
             aiWebConfig: {
                 agentServer: {
                     baseUrl: AGENT_SERVER_URL,

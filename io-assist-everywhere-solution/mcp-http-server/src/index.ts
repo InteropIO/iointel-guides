@@ -68,11 +68,12 @@ const getClientsTool = {
     name: "get_clients",
     config: {
         title: "Get Clients",
-        description: "Returns the list of ACME Banking clients available in io.Connect Desktop.",
+        description: "Returns the list of ACME Banking clients available in io.Connect Desktop. This list contains all the information about the clients that io.Connect Desktop has access to, including their id, portfolioId, firstName, lastName, segment, advisor, and riskProfile. This tool does not take any input parameters and will return an array of client objects.",
         inputSchema: {
             type: "object",
             properties: {},
-            additionalProperties: false
+            additionalProperties: false,
+            required: []
         },
         outputSchema: {
             type: "object",
