@@ -92,7 +92,20 @@ export const appConfig: ApplicationConfig = {
                         sandboxProxyUrl: MCP_SANDBOX_PROXY_URL,
                         displayMode: "workspace",
                     },
-                    ioIntel: IO_INTEL_MCP_CONFIG,
+                    ioIntel: {
+                        web: {
+                            enabled: false,
+                        },
+                    },
+                    remoteServers: [
+                        {
+                            streamableHttp: {
+                                url: 'http://localhost:3100/mcp',
+                                name: 'codemode-mcp',
+                            },
+                        },
+                    ],
+                    // ioIntel: IO_INTEL_MCP_CONFIG,
                 },
             },
         }),
