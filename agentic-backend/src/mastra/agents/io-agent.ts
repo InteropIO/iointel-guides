@@ -13,7 +13,7 @@ type LegacyLanguageModelUsage = {
 };
 
 const tokenUsageLogger = mastraLogger.child({
-    component: 'llm-token-usage',
+    component: 'agent-token-usage',
     agentId: 'io-agent',
 });
 
@@ -27,18 +27,18 @@ const readTokenCount = (
     return typeof tokenCount === 'number' ? tokenCount : 0;
 };
 
-const logLlmTokenUsage: NonNullable<AgentExecutionOptions['onStepFinish']> = (event) => {
-    const usage = event.usage as LanguageModelUsage & LegacyLanguageModelUsage;
+const logLlmTokenUsage: NonNullable<AgentExecutionOptions['onFinish']> = (event) => {
+    const usage = event.totalUsage as LanguageModelUsage & LegacyLanguageModelUsage;
     const inputTokens = readTokenCount(usage, 'inputTokens', 'promptTokens');
     const outputTokens = readTokenCount(usage, 'outputTokens', 'completionTokens');
     const totalTokens = usage.totalTokens ?? inputTokens + outputTokens;
 
-    tokenUsageLogger.warn(`LLM step token usage: input=${inputTokens}, output=${outputTokens}, total=${totalTokens}`, {
+    tokenUsageLogger.warn(`Agent call token usage: input=${inputTokens}, output=${outputTokens}, total=${totalTokens}`, {
         runId: event.runId,
         model: event.model?.modelId ?? event.response.modelId,
         provider: event.model?.provider,
         finishReason: event.finishReason,
-        stepType: event.stepType,
+        llmTrips: event.steps.length,
         inputTokens,
         outputTokens,
         totalTokens,
@@ -86,7 +86,7 @@ All API functions return a dict. Check 'result.get("success")' for status. Acces
     `,
     model: anthropic("claude-opus-4-5"),
     defaultOptions: {
-        onStepFinish: logLlmTokenUsage,
+        onFinish: logLlmTokenUsage,
     },
     memory: new Memory({
         options: {
