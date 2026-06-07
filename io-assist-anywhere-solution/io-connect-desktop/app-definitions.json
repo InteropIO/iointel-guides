@@ -191,6 +191,21 @@
         }
     },
     {
+        "name": "io-cd-mcp-host",
+        "type": "window",
+        "service": true,
+        "hidden": true,
+        "details": {
+            "url": "http://localhost:4203"
+        },
+        "caption": "Hidden ACME Banking service app that hosts MCP Web and registers the getClients interop method for io.Connect Desktop.",
+        "allowMultiple": false,
+        "ignoreFromLayouts": true,
+        "customProperties": {
+            "includeInWorkspaces": false
+        }
+    },
+    {
         "name": "io-intelligence-mcp-server",
         "type": "node",
         "service": true,
