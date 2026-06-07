@@ -12,8 +12,8 @@ Build an ACME Banking assistant that runs in io.Connect Browser and io.Connect D
 
 | Path | Purpose |
 | --- | --- |
-| `io-assist-everywhere-start/` | Starting point for the guide. |
-| `io-assist-everywhere-solution/` | Completed reference implementation. |
+| `io-assist-anywhere-start/` | Starting point for the guide. |
+| `io-assist-anywhere-solution/` | Completed reference implementation. |
 | `agentic-backend/` | Local Mastra backend used by the assistant apps. |
 
 ## Setup
@@ -21,7 +21,7 @@ Build an ACME Banking assistant that runs in io.Connect Browser and io.Connect D
 Install dependencies in each project you plan to run:
 
 ```bash
-cd io-assist-everywhere-start
+cd io-assist-anywhere-start
 npm install
 
 cd ../agentic-backend
@@ -48,7 +48,7 @@ npm start
 Start the frontend apps:
 
 ```bash
-cd io-assist-everywhere-start
+cd io-assist-anywhere-start
 npm start
 ```
 
@@ -61,7 +61,7 @@ http://localhost:4200
 The solution project uses the same flow:
 
 ```bash
-cd io-assist-everywhere-solution
+cd io-assist-anywhere-solution
 npm install
 npm start
 ```
@@ -73,6 +73,7 @@ npm start
 | io.Connect Browser platform | `4200` |
 | Client List | `4201` |
 | Client Portfolio | `4202` |
+| io.Connect Desktop MCP host | `4203` |
 | Angular io.Assist | `4003` |
 | React io.Assist | `4004` |
 | Custom AI Web assistant | `4005` |

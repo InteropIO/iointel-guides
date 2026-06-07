@@ -1,5 +1,5 @@
 {
-  "name": "io-assist-everywhere-start",
+  "name": "io-assist-anywhere-start",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -16,6 +16,7 @@
   "devDependencies": {
     "@interopio/browser": "^4.4.0",
     "@interopio/browser-platform": "^4.4.0",
+    "@interopio/desktop": "^6.20.3",
     "@interopio/home-ui-react": "^4.4.0",
     "@interopio/modals-api": "^4.4.0",
     "@interopio/workspaces-api": "^4.4.0",

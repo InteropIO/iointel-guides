@@ -1,0 +1,9 @@
+{
+  "name": "io-assist-custom",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "vite",
+    "build": "tsc -b && vite build"
+  }
+}
