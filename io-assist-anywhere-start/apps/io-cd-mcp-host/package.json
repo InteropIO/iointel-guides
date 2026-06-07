@@ -1,0 +1,10 @@
+{
+  "name": "io-cd-mcp-host",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run create-local-env && vite",
+    "build": "npm run create-local-env && tsc -b && vite build",
+    "create-local-env": "node ./scripts/create-local-env.js"
+  }
+}

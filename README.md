@@ -73,6 +73,7 @@ npm start
 | io.Connect Browser platform | `4200` |
 | Client List | `4201` |
 | Client Portfolio | `4202` |
+| io.Connect Desktop MCP host | `4203` |
 | Angular io.Assist | `4003` |
 | React io.Assist | `4004` |
 | Custom AI Web assistant | `4005` |
